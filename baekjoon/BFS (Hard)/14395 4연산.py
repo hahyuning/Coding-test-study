@@ -3,6 +3,7 @@ from collections import deque
 s, t = map(int, input().split())
 
 # 크기가 10억인 배열을 만드는 것은 비효율적이므로 방문 여부 확인을 위해 set 사용
+# 연산 횟수가 필요한게 아니라 연산 과정이 필요
 check = set()
 q = deque()
 q.append((s, ""))
