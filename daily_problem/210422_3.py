@@ -19,4 +19,6 @@ while q:
             q.append(nxt)
             time[nxt] = time[now] + 1
 
+
+
 print(time[b])
