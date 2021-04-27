@@ -20,6 +20,7 @@ for i in range(3):
     for j in range(cnt[i]):
         ans[i] += chr(ord("A") + i)
 
+# -----------------------------------------------
 # 딕셔너리 사용 -> 정점은 튜플로 변환
 dist = dict()
 q = deque()

@@ -1,8 +1,3 @@
-n = int(input())
-a = [list(input()) for _ in range(n)]
-c = [[-1] * n for _ in range(n)]
-ans = 0
-
 dx = [-1, -1, 0, 0, 1, 1]
 dy = [0, 1, -1, 1, -1, 0]
 
@@ -29,6 +24,12 @@ def dfs(x, y, color):
                 if c[nx][ny] == color:
                     # 색을 하나 더 사용
                     ans = max(ans, 3)
+
+# -------------------------------------------------------------
+n = int(input())
+a = [list(input()) for _ in range(n)]
+c = [[-1] * n for _ in range(n)]
+ans = 0
 
 for i in range(n):
     for j in range(n):

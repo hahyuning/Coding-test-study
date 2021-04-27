@@ -8,6 +8,7 @@ maps = [list(input().rstrip()) for _ in range(h)]
 dx = [0, 0, 1, -1]
 dy = [1, -1, 0, 0]
 
+# 시작점과 끝점 저장
 sx = sy = ex = ey = -1
 for i in range(h):
     for j in range(w):
@@ -17,7 +18,8 @@ for i in range(h):
             else:
                 ex, ey = i, j
 
-# 직선의 개수를 담을 배열
+# ----------------------------------------------------------
+# (i, j)까지 가는데 필요한 직선의 개수를 담을 배열
 lines = [[-1] * w for _ in range(h)]
 q = deque()
 lines[sx][sy] = 0
@@ -31,6 +33,8 @@ while q:
         while 0 <= nx < h and 0 <= ny < w:
             if maps[nx][ny] == "*":
                 break
+
+            # 처음 방문일 때만 기록, 방문했더라도 그 너머도 탐색해야 하므로 멈추면 안된다.
             if lines[nx][ny] == -1:
                 lines[nx][ny] = lines[x][y] + 1
                 q.append((nx, ny))

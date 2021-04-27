@@ -1,3 +1,6 @@
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+
 def dfs(x, y):
     global cnt
     board[x][y] = 0
@@ -10,9 +13,7 @@ def dfs(x, y):
             if board[nx][ny] == 1:
                 dfs(nx, ny)
 
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
-
+# -------------------------------------------------
 n = int(input())
 board = []
 for _ in range(n):
@@ -21,6 +22,7 @@ for _ in range(n):
 res = []
 for i in range(n):
     for j in range(n):
+        # 아파트가 있는 경우 카운트 시작
         if board[i][j] == 1:
             cnt = 0
             dfs(i, j)
