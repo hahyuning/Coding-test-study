@@ -1,12 +1,3 @@
-n = int(input())
-scv = list(map(int, input().split()))
-while len(scv) < 3:
-    scv.append(0)
-
-# d[i][j][k]: scv의 체력이 i, j, k 일 때 모두 파괴하는 최소 공격 횟수
-# 인덱스가 음수인 경우가 많이 발생하므로 탑다운 방식 사용
-d = [[[-1] * 61 for _ in range(61)] for _ in range(61)]
-
 def top_down(i, j, k):
     # 범위 검사
     if i < 0:
@@ -20,6 +11,7 @@ def top_down(i, j, k):
     if i == j == k == 0:
         return 0
 
+    # 메모이제이션
     if d[i][j][k] != -1:
         return d[i][j][k]
 
@@ -39,5 +31,15 @@ def top_down(i, j, k):
 
     d[i][j][k] = ans + 1
     return d[i][j][k]
+
+# ---------------------------------------------------------------------
+n = int(input())
+scv = list(map(int, input().split()))
+while len(scv) < 3:
+    scv.append(0)
+
+# d[i][j][k]: scv의 체력이 i, j, k 일 때 모두 파괴하는 최소 공격 횟수
+# 인덱스가 음수인 경우가 많이 발생하므로 탑다운 방식 사용
+d = [[[-1] * 61 for _ in range(61)] for _ in range(61)]
 
 print(top_down(scv[0], scv[1], scv[2]))
