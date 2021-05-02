@@ -1,13 +1,12 @@
 import sys
 
-n = int(sys.stdin.readline())
-scores = [list(map(int, input().split())) for _ in range(n)]
-
 def calculation(start, link):
+    # 백트래킹
     if len(start) == 0:
         return -1
     if len(link) == 0:
         return -1
+
     t1 = 0
     t2 = 0
     for i in start:
@@ -15,6 +14,7 @@ def calculation(start, link):
             if i == j:
                 continue
             t1 += scores[i][j]
+
     for i in link:
         for j in link:
             if i == j:
@@ -36,6 +36,10 @@ def combination(index, start, link):
 
     combination(index + 1, start + [index], link)
     combination(index + 1, start, link + [index])
+
+# --------------------------------------------------------
+n = int(sys.stdin.readline())
+scores = [list(map(int, input().split())) for _ in range(n)]
 
 combination(0, [], [])
 print(ans)

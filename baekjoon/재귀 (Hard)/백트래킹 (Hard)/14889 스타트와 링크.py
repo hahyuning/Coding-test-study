@@ -1,9 +1,8 @@
 n = int(input())
 s = [list(map(int, input().split())) for _ in range(n)]
-#------------------------------------------------------------
-# 비트마스크
-ans = -1
 
+# 풀이 1. 비트마스크
+ans = -1
 for i in range((1 << n)):
     first = []
     second = []
@@ -12,6 +11,7 @@ for i in range((1 << n)):
             first += [j]
         else:
             second += [j]
+    # 팀이 반반으로 나누어지지 않은 경우
     if len(first) != n // 2:
         continue
 
@@ -29,13 +29,15 @@ for i in range((1 << n)):
         ans = diff
 print(ans)
 
-#----------------------------------------------------------
-# 조합
+
+# 풀이 2. 조합
 def calculation(start, link):
+    # 백트래킹
     if len(start) != n // 2:
         return -1
     if len(link) != n // 2:
         return -1
+
     t1 = 0
     t2 = 0
     for i in range(n // 2):
@@ -47,11 +49,11 @@ def calculation(start, link):
     diff = abs(t1 - t2)
     return diff
 
-ans = 1000
 def combination(index, start, link):
     global ans
-
+    # 종료 조건: 인덱스가 끝에 도달한 경우
     if index == n:
+        # 각 팀의 점수 계산
         tmp = calculation(start, link)
         if tmp != -1:
             ans = min(ans, tmp)
@@ -60,5 +62,6 @@ def combination(index, start, link):
     combination(index + 1, start + [index], link)
     combination(index + 1, start, link + [index])
 
+ans = 1000
 combination(0, [], [])
 print(ans)

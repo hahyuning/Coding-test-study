@@ -48,7 +48,6 @@ if ans == 11:
     print(-1)
 else:
     print(ans)
-
 #------------------------------------------------------------------------------
 
 def dfs(x1, y1, x2, y2, cnt):
@@ -90,6 +89,7 @@ def dfs(x1, y1, x2, y2, cnt):
 n, m = map(int, input().split())
 board = [[0] * m for _ in range(n)]
 coins = []
+# 코인 위치 따로 기록
 for i in range(n):
     a = list(input())
     for j in range(m):
