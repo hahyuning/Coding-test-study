@@ -1,4 +1,5 @@
 n = int(input())
+# 1 ~ n 까지 소수 구하기
 # 소수일 경우 False, 소수가 아닐 경우 True
 prime_check = [False] * (n + 1)
 primes = []
@@ -12,9 +13,11 @@ for i in range(2, n + 1):
         prime_check[j] = True
         j += i
 
+# -----------------------------------------
 left, right = 0, 0
 cnt = 0
 sum = 0
+
 if len(primes) != 0:
     sum = primes[0]
 
