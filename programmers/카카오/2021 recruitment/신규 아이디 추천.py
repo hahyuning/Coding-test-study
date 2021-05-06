@@ -7,7 +7,7 @@ def solution(new_id):
         elif x.islower() or x.isdigit() or x in special:
             step1.append(x)
 
-    step3 = []
+    step2 = []
     i = 0
     prev = 0
     while i < len(step1):
@@ -19,35 +19,35 @@ def solution(new_id):
                 else:
                     break
             if cnt >= 2:
-                step3 += step1[prev:i + 1]
+                step2 += step1[prev:i + 1]
             else:
-                step3 += "."
+                step2 += "."
 
             i += cnt
             prev = i
         else:
-            step3 += step1[i:i + 1]
+            step2 += step1[i:i + 1]
             i += 1
             prev = i
 
-    step3 += step1[prev:]
+    step2 += step1[prev:]
 
-    while step3 and step3[0] == ".":
-        step3.pop(0)
-    while step3 and step3[-1] == ".":
-        step3.pop()
+    while step2 and step2[0] == ".":
+        step2.pop(0)
+    while step2 and step2[-1] == ".":
+        step2.pop()
 
-    if len(step3) == 0:
-        step3.append("a")
-    elif len(step3) > 15:
-        step3 = step3[:15]
+    if len(step2) == 0:
+        step2.append("a")
+    elif len(step2) > 15:
+        step2 = step2[:15]
 
-    while step3 and step3[-1] == ".":
-        step3.pop()
+    while step2 and step2[-1] == ".":
+        step2.pop()
 
-    while len(step3) < 3:
-        step3.append(step3[-1])
+    while len(step2) < 3:
+        step2.append(step2[-1])
 
-    return "".join(step3)
+    return "".join(step2)
 
 print(solution("...!@BaT#*..y.abcdefghijklm"))
