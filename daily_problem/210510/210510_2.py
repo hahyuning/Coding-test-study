@@ -1,17 +1,6 @@
-import copy
-import sys
+from itertools import product
+import copy, sys
 input = sys.stdin.readline
-# 기울일 수 있는 모든 방법 만들기 (재귀 or 비트마스크) -> 4 ** 10
-# 바로 전 기울인 방향으로는 다시 기울이지 않아도 됨 -> 4 * (3 ** 9)
-# 바로 전 기울인 방향의 반대 방향으로는 다시 기울이지 않아도 됨 -> 4 * (2 ** 9)
-
-# 2진법을 4진법으로 변환
-def base_change(k):
-    a = [0] * 10
-    for i in range(10):
-        a[i] = k & 3
-        k >>= 2
-    return a
 
 # 기울임 유효성 체크
 def valid(directions):
@@ -110,8 +99,7 @@ dy = [1, 0, -1, 0]
 
 ans = -1
 # 경우의 수: 2의 20승
-for k in range(1 << 20):
-    directions = base_change(k)
+for directions in product([0, 1, 2, 3], repeat=10):
     # 해당 기울임이 유효한지 체크
     if not valid(directions):
         continue
