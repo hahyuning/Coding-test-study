@@ -45,9 +45,9 @@ def check(tmp_board, directions):
     cnt = 0
     for k in directions:
         cnt += 1
-        # 구슬이 구멍에 들어갔는지 체크
+        # 각각의 기울임마다 구슬이 구멍에 들어갔는지 체크
         hole1 = hole2 = False
-        # 각 구슬에 대해 실제 이동 처리
+        # 각 구슬에 대해 실제 이동 처리 (움직임이 없을 때까지 반복)
         while True:
             bead1 = move(tmp_board, k, rx, ry)
             rx, ry = bead1[2], bead1[3]
@@ -97,6 +97,7 @@ def move(tmp_board, k, x, y):
             moved = True
         # 구멍에 빠진 경우
         elif tmp_board[nx][ny] == "O":
+            # 구슬이 없어졌기 때문에 79번 줄 필요
             tmp_board[x][y] = "."
             moved = True
             return [moved, True, x, y]

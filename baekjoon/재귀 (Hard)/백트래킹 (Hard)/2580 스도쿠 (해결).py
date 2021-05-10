@@ -19,6 +19,7 @@ def sudoku(n):
                 a[i][j] = k
                 if sudoku(n + 1):
                     return True
+                # 잘못된 스도쿠였을 경우
                 check_horizontal[i][k] = False
                 check_vertical[j][k] = False
                 check_square[3 * (i // 3) + (j // 3)][k] = False
