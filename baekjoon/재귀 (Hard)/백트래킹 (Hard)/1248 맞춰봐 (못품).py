@@ -13,18 +13,19 @@ def check(index):
                 return False
     return True
 
-def permutation_with_repetition(index):
-    print(ans)
+def match(index):
+    # 종료 조건: n개의 숫자를 다 찾은 경우
     if index == n:
         return True
 
+    # 대각선이 0인 경우
     if sign[index][index] == 0:
         ans[index] = 0
-        return check(index) and permutation_with_repetition(index + 1)
+        return check(index) and match(index + 1)
 
     for i in range(1, 11):
         ans[index] = i * sign[index][index]
-        if check(index) and permutation_with_repetition(index + 1):
+        if check(index) and match(index + 1):
             return True
     return False
 
@@ -47,6 +48,6 @@ for i in range(n):
             sign[i][j] = -1
         pnt += 1
 
-permutation_with_repetition(0)
+match(0)
 print(" ".join(map(str, ans)))
 
