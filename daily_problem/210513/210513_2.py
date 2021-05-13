@@ -1,18 +1,23 @@
+import sys
+
+def dfs(s):
+    global ans
+    if len(s) == n + 1:
+        print(int(s))
+        sys.exit(0)
+
+    for i in range(1, 4):
+        if i == s[-1]:
+            continue
+        if check(s + str(i)):
+            dfs(s + str(i))
+
+def check(s):
+    s = s[1:]
+    for l in range(1, len(s) // 2 + 1):
+        if s[-l:] == s[-2 * l:-l]:
+            return False
+    return True
+
 n = int(input())
-tower = list(map(int, input().split()))
-tower.reverse()
-
-answer = [0] * n
-stack = []
-for i, x in enumerate(tower):
-    while stack and tower[i] > stack[-1][1]:
-        j, y = stack.pop()
-        answer[j] = n - i
-
-        if not stack:
-            break
-
-    stack.append((i, x))
-
-answer.reverse()
-print(" ".join(map(str, answer)))
+dfs("0")
