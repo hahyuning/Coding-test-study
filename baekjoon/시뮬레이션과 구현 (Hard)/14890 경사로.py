@@ -1,9 +1,8 @@
-def go(a, l):
-    n = len(a)
+def slide(a):
     # 경사로를 놓았는지 확인하기 위한 배열
     c = [False] * n
     for i in range(1, n):
-        # 높이가 다르면
+        # 높이가 다른 경우
         if a[i - 1] != a[i]:
             diff = abs(a[i] - a[i - 1])
             # 두 칸의 높이의 차이가 1이 아니면 false
@@ -34,20 +33,22 @@ def go(a, l):
                     c[i + j] = True
     return True
 
+# l: 경사로의 길이
 n, l = map(int, input().split())
 a = [list(map(int, input().split())) for _ in range(n)]
+# 지나갈 수 있는 길의 개수
 ans = 0
 
 # 행에 대해 계산
 for i in range(n):
     d = a[i]
-    if go(d, l):
+    if slide(d):
         ans += 1
 
 # 열에 대해 계산
 for j in range(n):
     d = [a[i][j] for i in range(n)]
-    if go(d, l):
+    if slide(d):
         ans += 1
 
 print(ans)
