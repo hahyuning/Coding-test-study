@@ -123,8 +123,8 @@ for i in range(m):
         a[x][y] = 0
         cnt += 1
 
-    b = make_line(a)
     b = bomb(b)
+    b = make_line(a)
     a = make_map(b)
 
 print(ans)
