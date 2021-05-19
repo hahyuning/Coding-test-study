@@ -17,7 +17,7 @@ def bfs():
                 check[i][j] = True
 
                 # 연합을 이루는 칸의 좌표 저장
-                stack = [(i, j)]
+                alliance = [(i, j)]
                 # 연합을 이루는 칸의 총 인구
                 total = a[i][j]
                 while q:
@@ -29,13 +29,13 @@ def bfs():
                             diff = abs(a[x][y] - a[nx][ny])
                             if l <= diff <= r:
                                 q.append((nx, ny))
-                                stack.append((nx, ny))
+                                alliance.append((nx, ny))
                                 check[nx][ny] = True
                                 move = True
                                 total += a[nx][ny]
 
-                val = total // len(stack)
-                for x, y in stack:
+                val = total // len(alliance)
+                for x, y in alliance:
                     a[x][y] = val
     return move
 
