@@ -1,21 +1,12 @@
 n = int(input())
-a = list(map(int, input().split()))
-left = 0
-right = n - 1
-min_val = abs(a[left] + a[right])
-ans = [a[left], a[right]]
+h = [int(input()) for _ in range(n)]
+stack = []
+ans = 0
 
-while left < right:
-    mix = a[left] + a[right]
-    if abs(mix) < min_val:
-        min_val = abs(mix)
-        ans = [a[left], a[right]]
+for x in h:
+    while stack and stack[-1] <= x:
+        stack.pop()
+    stack.append(x)
+    ans += len(stack) - 1
 
-    if mix > 0:
-        right -= 1
-    elif mix < 0:
-        left += 1
-    else:
-        break
-
-print(" ".join(map(str, ans)))
+print(ans)

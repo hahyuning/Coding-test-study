@@ -1,39 +1,24 @@
+from bisect import bisect_left
+
 n = int(input())
-a = [int(input()) for _ in range(n)]
-check = [True] * (n + 1)
-ans = []
-last = 0
-check[0] = False
+a = list(map(int, input().split()))
+a.sort()
+ans = 0
 
-seq_check = False
-for x in a:
-    if last < x:
-        cnt = sum(check[last + 1:x + 1])
-        ans += ["+"] * cnt
+for i, x in enumerate(a):
+    tmp = a[:i] + a[i + 1:]
 
-        ans.append("-")
-        check[x] = False
+    left = 0
+    right = len(tmp) - 1
 
-        for y in range(x - 1, -1, -1):
-            if check[y] == True:
-                last = y
-                break
-    elif last == x:
-        ans.append("-")
-        check[x] = False
+    while left < right:
+        s = tmp[left] + tmp[right]
+        if s < x:
+            left += 1
+        elif s > x:
+            right -= 1
+        else:
+            ans += 1
+            break
 
-        for y in range(x - 1, -1, -1):
-            if check[y] == True:
-                last = y
-                break
-    else:
-        seq_check = True
-        break
-
-if seq_check:
-    print("NO")
-else:
-    for x in ans:
-        print(x)
-
-
+print(ans)

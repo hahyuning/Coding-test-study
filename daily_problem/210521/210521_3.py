@@ -1,48 +1,33 @@
-from collections import deque
+import heapq
+v, e = map(int, input().split())
+graph = [[] for _ in range(v + 1)]
+for _ in range(e):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a)
 
-t = int(input())
-for _ in range(t):
-    command = input()
-    n = int(input())
-    a = input()
-    a = a[1:-1]
-    b = a.split(',')
-    q = deque()
-    for x in b:
-        if x != "":
-            q.append(int(x))
+dist = [-1] * (v + 1)
+dist[1] = 0
+max_dist = 0
 
-    check = False
-    revers_check = False
-    i = 0
-    while i < len(command):
-        if command[i] == "R":
-            cnt = 1
-            for j in range(i + 1, len(command)):
-                if command[j] == "R":
-                    cnt += 1
-                else:
-                    break
-            if cnt % 2 == 1:
-                revers_check = not revers_check
-            i += cnt
-        else:
-            if len(q) == 0:
-                check = True
-                break
+q = []
+heapq.heappush(q, (0, 1))
+while q:
+    cost, now = heapq.heappop(q)
+    if dist[now] != -1 and dist[now] < cost:
+        continue
 
-            if revers_check == False:
-                q.popleft()
-            else:
-                q.pop()
-            i += 1
+    for nxt in graph[now]:
+        if dist[nxt] == -1 or cost + 1 < dist[nxt]:
+            max_dist = max(max_dist, cost + 1)
+            dist[nxt] = cost + 1
+            heapq.heappush(q, (cost + 1, nxt))
 
-    q = list(q)
-    if not check:
-        if revers_check:
-            q.reverse()
+ans = []
+for i, x in enumerate(dist):
+    if x == max_dist:
+        ans.append(i)
 
-        ans = ",".join(map(str, q))
-        print("[" + ans + "]")
-    else:
-        print("error")
+print(ans[0], end=" ")
+print(max_dist, end=" ")
+print(len(ans))

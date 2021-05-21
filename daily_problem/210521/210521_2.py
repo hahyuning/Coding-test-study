@@ -1,25 +1,29 @@
-from collections import deque
+import heapq
+v = int(input())
+e = int(input())
+graph = [[] for _ in range(v + 1)]
+for _ in range(e):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a)
 
-n, m = map(int, input().split())
-target = list(map(int, input().split()))
-ans = 0
+dist = [-1] * (v + 1)
+dist[1] = 0
 
-q = deque([i for i in range(1, n + 1)])
-for num in target:
-    if q[0] == num:
-        q.popleft()
+q = []
+heapq.heappush(q, (0, 1))
+while q:
+    cost, now = heapq.heappop(q)
+    if dist[now] != -1 and dist[now] < cost:
         continue
 
-    i = q.index(num)
-    if i <= len(q) // 2:
-        ans += i
-        for _ in range(i):
-            q.append(q.popleft())
-        q.popleft()
-    else:
-        ans += (len(q) - i)
-        for _ in range(len(q) - i):
-            q.appendleft(q.pop())
-        q.popleft()
+    for nxt in graph[now]:
+        if dist[nxt] == -1 or cost + 1 < dist[nxt]:
+            dist[nxt] = cost + 1
+            heapq.heappush(q, (cost + 1, nxt))
 
-print(ans)
+ans = 0
+for x in dist:
+    if x != -1 and x <= 2:
+        ans += 1
+print(ans - 1)
