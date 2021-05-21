@@ -28,13 +28,13 @@ def hamburger(n, x):
     elif x == 1:
         return 0
 
-    # x가 햄버거번, 레벨 n - 1 버거까지인 경우
+    # x가 [햄버거번, 레벨 n - 1 버거]까지인 경우
     elif x <= 1 + d[n - 1]:
         return hamburger(n - 1, x - 1)
-    # x가 햄버거번, 레벨 n - 1 버거, 패티까지인 경우
+    # x가 [햄버거번, 레벨 n - 1 버거, 패티]까지인 경우
     elif x == 2 + d[n - 1]:
         return p[n - 1] + 1
-    # x가 햄버거번, 레벨 n - 1 버거, 패티, 레벨 n - 1 버거 까지인 경우
+    # x가 [햄버거번, 레벨 n - 1 버거, 패티, 레벨 n - 1 버거]까지인 경우
     elif x <= 2 + 2 * d[n - 1]:
         return p[n - 1] + 1 + hamburger(n - 1, x - 2 - d[n - 1])
     # x가 전체인 경우
