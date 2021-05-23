@@ -1,3 +1,4 @@
+# 상하반전
 def op_1(a, n, m):
     b = [[0] * m for _ in range(n)]
     for i in range(n):
@@ -5,6 +6,7 @@ def op_1(a, n, m):
             b[i][j] = a[n - i - 1][j]
     return b
 
+# 좌우반전
 def op_2(a, n, m):
     b = [[0] * m for _ in range(n)]
     for i in range(n):
@@ -12,6 +14,7 @@ def op_2(a, n, m):
             b[i][j] = a[i][m - j - 1]
     return b
 
+# 오른쪽으로 90도 회전
 def op_3(a, n, m):
     b = [[0] * n for _ in range(m)]
     for i in range(m):
@@ -19,6 +22,7 @@ def op_3(a, n, m):
             b[i][j] = a[n - j - 1][i]
     return b
 
+# 왼쪽으로 90도 회전
 def op_4(a, n, m):
     b = [[0] * n for _ in range(m)]
     for i in range(m):
@@ -26,6 +30,7 @@ def op_4(a, n, m):
             b[i][j] = a[j][m - i - 1]
     return b
 
+# 4개의 그룹으로 나누어 오른쪽으로 회전
 def op_5(a, n, m):
     b = [[0] * m for _ in range(n)]
     for i in range(n // 2):
@@ -36,6 +41,7 @@ def op_5(a, n, m):
             b[i][j] = a[i + n // 2][j]
     return b
 
+# 4개의 그룹으로 나누어 왼쪽으로 회전
 def op_6(a, n, m):
     b = [[0] * m for _ in range(n)]
     for i in range(n // 2):
