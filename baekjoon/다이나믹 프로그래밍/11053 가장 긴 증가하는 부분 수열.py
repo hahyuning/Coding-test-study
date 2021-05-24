@@ -1,4 +1,3 @@
-from bisect import bisect_left
 n = int(input())
 a = list(map(int, input().split()))
 # d[i] : a[i]를 마지막으로 하는 가장 긴 증가하는 부분 수열의 길이
