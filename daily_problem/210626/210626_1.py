@@ -1,3 +1,42 @@
+import sys
+
+def dfs(x, y, num):
+    check[x][y] = True
+    a[x][y] = num
+
+    for k in range(4):
+        nx, ny = x + dx[k], y + dy[k]
+        if 0 <= nx < n and 0 <= ny < m and not check[nx][ny] and a[nx][ny] == 1:
+            dfs(nx, ny, num)
+
+def distance(start):
+    res = dict()
+    check = [[False] * m for _ in range(n)]
+    for i in range(n):
+        for j in range(m):
+            if a[i][j] == start and not check[i][j]:
+                check[i][j] = True
+                for k in range(4):
+                    x, y = i, j
+                    d = [[-1] * m for _ in range(n)]
+                    nx, ny = x + dx[k], y + dy[k]
+                    while 0 <= nx < n and 0 <= ny < m and d[nx][ny] == -1:
+                        if a[nx][ny] == a[i][j]:
+                            break
+                        d[nx][ny] = d[x][y] + 1
+                        if a[nx][ny] != 0:
+                            if d[nx][ny] > 1:
+                                if a[nx][ny] in res and d[nx][ny] < res[a[nx][ny]]:
+                                    res[a[nx][ny]] = d[nx][ny]
+                                elif a[nx][ny] not in res:
+                                    res[a[nx][ny]] = d[nx][ny]
+                            break
+                        x = nx
+                        y = ny
+                        nx += dx[k]
+                        ny += dy[k]
+    return res
+
 def find(x):
     if parent[x] != x:
         parent[x] = find(parent[x])
@@ -6,23 +45,51 @@ def find(x):
 def union(a, b):
     a = find(a)
     b = find(b)
-
     if a < b:
         parent[b] = a
     else:
         parent[a] = b
 
-t = int(input())
-for _ in range(t):
-    n, m = map(int, input().split())
-    parent = [i for i in range(n + 1)]
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
 
-    ans = 0
-    for _ in range(m):
-        a, b = map(int, input().split())
-        if find(a) == find(b):
+n, m = map(int, input().split())
+a = [list(map(int, input().split())) for _ in range(n)]
+
+num = 0
+check = [[False] * m for _ in range(n)]
+for i in range(n):
+    for j in range(m):
+        if not check[i][j] and a[i][j] == 1:
+            num += 1
+            dfs(i, j, num)
+
+dist = [[0] * (num + 1) for _ in range(num + 1)]
+for i in range(1, num + 1):
+    res = distance(i)
+    for j in res:
+        dist[i][j] = res[j]
+
+edges = []
+for i in range(1, num + 1):
+    for j in range(i, num + 1):
+        if i == j:
             continue
+        if dist[i][j] > 1:
+            edges.append((dist[i][j], i, j))
+edges.sort()
 
+parent = [i for i in range(num + 1)]
+res = 0
+for edge in edges:
+    cost, a, b = edge
+    if find(a) != find(b):
         union(a, b)
-        ans += 1
-    print(ans)
+        res += cost
+
+for i in range(1, num):
+    if find(i) != find(i + 1):
+        print(-1)
+        sys.exit(0)
+
+print(res)

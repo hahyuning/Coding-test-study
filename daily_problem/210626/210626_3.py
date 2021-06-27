@@ -1,62 +1,41 @@
-lst = []
-while True:
-    tmp = list(map(int, input().split()))
-    if tmp:
-        if tmp[-1] == -1 and tmp[-2] == -1:
-            break
-        else:
-            lst += tmp
+def find(x):
+    if parent[x] != x:
+        parent[x] = find(parent[x])
+    return parent[x]
 
-all_graph = []
-graph = dict()
-all_node = []
-node = dict()
-for i in range(0, len(lst), 2):
-    if lst[i] == 0 and lst[i + 1] == 0:
-        all_graph.append(graph)
-        graph = dict()
-        all_node.append(node)
-        node = dict()
-        continue
-    if lst[i] in graph:
-        graph[lst[i]].append(lst[i + 1])
+def union(a, b):
+    a = find(a)
+    b = find(b)
+    if a < b:
+        parent[b] = a
     else:
-        graph[lst[i]] = [lst[i + 1]]
+        parent[a] = b
 
-    if lst[i] not in node:
-        node[lst[i]] = 0
-    if lst[i + 1] not in node:
-        node[lst[i + 1]] = 1
-    else:
-        node[lst[i + 1]] += 1
+n, m = map(int, input().split())
+edges = []
+for _ in range(m + 1):
+    a, b, c = map(int, input().split())
+    c = 1 - c
+    edges.append((c, a, b))
 
-for i, g in enumerate(all_graph, start=1):
-    # 1. 루트 노드 1개
-    # 2. 나머지 노드 간선 1개
-    # 3. 경로 유일
+edges.sort()
+parent = [i for i in range(m + 1)]
+min_val = 0
+for edge in edges:
+    cost, a, b = edge
+    if find(a) != find(b):
+        union(a, b)
+        min_val += cost
 
-    n = len(all_node[i - 1].keys())
-    if n == 0:
-        print("Case " + str(i) + " is a tree.")
-    else:
-        cnt1 = 0
-        cnt2 = False
-        for x in all_node[i - 1].values():
-            if x == 0:
-                cnt1 += 1
-            elif x > 1:
-                cnt2 = True
-        cnt3 = 0
-        for x in g.values():
-            cnt3 += len(x)
+edges.sort(reverse=True)
+parent = [i for i in range(m + 1)]
+max_val = 0
+for edge in edges:
+    cost, a, b = edge
+    if find(a) != find(b):
+        union(a, b)
+        max_val += cost
 
-        if cnt1 > 1 or cnt1 == 0:
-            print("Case " + str(i) + " is not a tree.")
-        elif cnt2:
-            print("Case " + str(i) + " is not a tree.")
-        else:
-            if cnt3 == n - 1:
-                print("Case " + str(i) + " is a tree.")
-            else:
-                print("Case " + str(i) + " is not a tree.")
-
+max_val = max_val ** 2
+min_val = min_val ** 2
+print(max_val - min_val)
