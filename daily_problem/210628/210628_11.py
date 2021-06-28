@@ -1,25 +1,24 @@
-def check(x):
-    res = 0
-    for y in l:
-        res += y // x
-    return res
+import sys
 
 s, c = map(int, input().split())
 l = [int(input()) for _ in range(s)]
 
 lt = 0
-rt = max(l) - 1
-ans = 0
-cnt = 0
+rt = 1000000000
+ans = sys.maxsize
 while lt <= rt:
     mid = (lt + rt) // 2
-    res = check(mid)
-    if res >= c:
-        ans = mid
-        cnt = res
+    if max(l) < mid:
+        rt = mid - 1
+        continue
+
+    cnt = 0
+    for x in l:
+        cnt += x // mid
+
+    if cnt >= c:
+        ans = min(ans, sum(l) - mid * c)
         lt = mid + 1
     else:
         rt = mid - 1
-
-print(sum(l) - cnt * ans)
-
+print(ans)
