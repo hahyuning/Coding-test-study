@@ -1,25 +1,35 @@
-def check(x):
-    for i in range(len(a)):
-        if i == len(a) - 1 and n - a[i] > x:
-            return False
-        if i == 0 and a[i] > x:
-            return False
-        if i != len(a) - 1 and i != 0 and a[i + 1] - a[i] > 2 * x:
-            return False
-    return True
+def gcd(a, b):
+    if a < b:
+        a, b = b, a
 
-n = int(input())
-m = int(input())
-a = list(map(int, input().split()))
+    if b == 0:
+        return a
+    return gcd(b, a % b)
 
-lt = 0
-rt = n
-ans = 0
-while lt <= rt:
-    mid = (lt + rt) // 2
-    if not check(mid):
-        lt = mid + 1
-    else:
-        rt = mid - 1
-        ans = mid
-print(ans)
+def lcm(a, b):
+    return a * b // gcd(a, b)
+
+a = input()
+b = input()
+
+n = len(a)
+m = len(b)
+k = lcm(n, m)
+
+while True:
+    a += a
+    if len(a) >= k:
+        break
+a = a[:k]
+
+while True:
+    b += b
+    if len(b) >= k:
+        break
+b = b[:k]
+
+if a == b:
+    print(1)
+else:
+    print(0)
+

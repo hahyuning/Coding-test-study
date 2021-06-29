@@ -1,13 +1,27 @@
-x, y = map(int, input().split())
-lt = 0
-rt = 1000000000
+while True:
+    try:
+        s = input()
+        ans = ""
+        moum = ["a", "i", "y", "e", "o", "u"]
+        jaum = ["b", "k", "x", "z", "n", "h", "d", "c", "w", "g", "p", "v", "j", "q", "t", "s", "r", "l", "m", "f"]
+        for x in s:
+            check = False
+            if x.isalpha():
+                if x.isupper():
+                    check = True
+                    x = chr(ord(x) + 32)
+                if x in moum:
+                    tmp = moum[(moum.index(x) + 3) % 6]
+                else:
+                    tmp = jaum[(jaum.index(x) + 10) % 20]
 
-ans = -1
-while lt <= rt:
-    mid = (lt + rt) // 2
-    if (y + mid) * 100 // (x + mid) > y * 100 // x:
-        ans = mid
-        rt = mid - 1
-    else:
-        lt = mid + 1
-print(ans)
+                if check:
+                    ans += tmp.upper()
+                else:
+                    ans += tmp
+            else:
+                ans += x
+
+        print(ans)
+    except:
+        break

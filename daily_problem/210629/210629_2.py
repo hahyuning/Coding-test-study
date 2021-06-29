@@ -1,6 +1,12 @@
-import math
-n = int(input())
-if int(math.sqrt(n)) == math.sqrt(n):
-    print(int(math.sqrt(n)))
+a = input()
+b = input()
+
+s = ""
+for x in a:
+    if x.isalpha():
+        s += x
+
+if b in s:
+    print(1)
 else:
-    print(int(math.sqrt(n)) + 1)
+    print(0)

@@ -1,15 +1,21 @@
-from bisect import bisect_left
+import sys
+input = sys.stdin.readline
 
-n, m = map(int, input().split())
-a = [int(input()) for _ in range(n)]
-a.sort()
-for _ in range(m):
-    x = int(input())
-    idx = bisect_left(a, x)
-    if idx >= n:
-        print(-1)
-    else:
-        if a[idx] == x:
-            print(idx)
-        else:
-            print(-1)
+while True:
+    n = int(input())
+    if n == 0:
+        break
+
+    a = [input().rstrip() for _ in range(n)]
+    b = dict()
+    for x in a:
+        tmp = ""
+        for i in range(len(x)):
+            if x[i].isupper():
+                tmp += x[i].lower()
+            else:
+                tmp += x[i]
+        b[tmp] = x
+
+    c = sorted(b.items(), key=lambda x:x[0])
+    print(c[0][1])

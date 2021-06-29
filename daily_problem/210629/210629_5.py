@@ -1,22 +1,12 @@
-def check(x):
-    res = 0
-    for time in t:
-        res += x // time
-    return res
-
-n, m = map(int, input().split())
-t = [int(input()) for _ in range(n)]
-
-ans = 0
-lt = 0
-rt = max(t) * (m // len(t)) + 1
-while lt <= rt:
-    mid = (lt + rt) // 2
-    res = check(mid)
-    if res < m:
-        lt = mid + 1
+s = input()
+pikachu = ["pi", "ka", "chu"]
+while len(s) > 0:
+    if s[:2] in pikachu:
+        s = s[2:]
+    elif s[:3] in pikachu:
+        s = s[3:]
     else:
-        rt = mid - 1
-        ans = mid
-print(ans)
-
+        print("NO")
+        break
+else:
+    print("YES")

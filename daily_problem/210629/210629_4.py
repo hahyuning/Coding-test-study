@@ -1,15 +1,21 @@
-from bisect import bisect_left
 import sys
 input = sys.stdin.readline
 
-n, m = map(int, input().split())
-points = list(map(int, input().split()))
-points.sort()
-for _ in range(m):
-    s, e = map(int, input().split())
-    s_id = bisect_left(points, s)
-    e_id = bisect_left(points, e)
-    if e_id < n and points[e_id] == e:
-        print(e_id  - s_id + 1)
-    else:
-        print(e_id - s_id)
+t = int(input())
+for _ in range(t):
+    all = input().rstrip().split()
+    others = []
+    while True:
+        s = input().rstrip()
+        if s == "what does the fox say?":
+            ans = []
+            for x in all:
+                if x not in others:
+                    ans.append(x)
+            print(" ".join(ans))
+            break
+
+        tmp = s.split()
+        others.append(tmp[-1])
+
+
