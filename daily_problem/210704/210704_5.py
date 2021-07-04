@@ -1,70 +1,61 @@
-def solution(x, y, d1, d2):
-    tmp = [[0] * (n + 1) for _ in range(n + 1)]
-    tmp[x][y] = 5
-    for i in range(1, d1 + 1):
-        tmp[x + i][y - i] = 5
-    for i in range(1, d2 + 1):
-        tmp[x + i][y + i] = 5
-    for i in range(1, d2 + 1):
-        tmp[x + d1 + i][y - d1 + i] = 5
-    for i in range(1, d1 + 1):
-        tmp[x + d2 + i][y + d2 - i] = 5
+from itertools import combinations
+from collections import deque
 
-    people = [0] * 5
-    # 1번 선거구
-    for r in range(1, x + d1):
-        for c in range(1, y + 1):
-            if tmp[r][c] == 5:
-                break
-            else:
-                people[0] += maps[r][c]
+def bfs(start, x):
+    check = [False] * (n + 1)
+    q = deque()
+    q.append(start)
+    check[start] = True
 
-    # 2번 선거구
-    for r in range(1, x + d2 + 1):
-        for c in range(n, y, -1):
-            if tmp[r][c] == 5:
-                break
-            else:
-                people[1] += maps[r][c]
-
-    # 3번 선거구
-    for r in range(x + d1, n + 1):
-        for c in range(1, y - d1 + d2):
-            if tmp[r][c] == 5:
-                break
-            else:
-                people[2] += maps[r][c]
-
-    # 4번 선거구
-    for r in range(x + d2 + 1, n + 1):
-        for c in range(n, y - d1 + d2 - 1, -1):
-            if tmp[r][c] == 5:
-                break
-            else:
-                people[3] += maps[r][c]
-
-    # 5번 선거구
-    people[4] = total - sum(people)
-    return max(people) - min(people)
+    while q:
+        now = q.popleft()
+        for nxt in graph[now]:
+            if nxt in x and not check[nxt]:
+                check[nxt] = True
+                q.append(nxt)
+    return check
 
 n = int(input())
-maps = [[0] * (n + 1)] + [[0] + list(map(int, input().split())) for _ in range(n)]
-
-total = 0
+people = [0] + list(map(int, input().split()))
+graph = [[] for _ in range(n + 1)]
 for i in range(1, n + 1):
-    total += sum(maps[i])
+    m, *a = map(int, input().split())
+    for j in a:
+        graph[i].append(j)
 
-answer = 1000000000
-for x in range(1, n + 1):
-    for y in range(1, n + 1):
-        for d1 in range(1, n + 1):
-            for d2 in range(1, n + 1):
-                if x + d1 + d2 > n:
-                    continue
-                if y - d1 < 1:
-                    continue
-                if y + d2 > n:
-                    continue
-                answer = min(answer, solution(x, y, d1, d2))
+total = sum(people)
+ans = -1
+for m in range(1, n // 2 + 1):
+    all_set = combinations([i for i in range(1, n + 1)], m)
 
-print(answer)
+    for x1 in all_set:
+        ch = True
+        x2 = []
+        for i in range(1, n + 1):
+            if i not in x1:
+                x2.append(i)
+
+        check = bfs(x1[0], x1)
+        s1 = 0
+        for y in x1:
+            if not check[y]:
+                ch = False
+                break
+            s1 += people[y]
+
+        check = bfs(x2[0], x2)
+        s2 = 0
+        for i in range(1, n + 1):
+            if i not in x1:
+                if not check[i]:
+                    ch = False
+                    break
+                s2 += people[i]
+        if ch:
+            if ans == -1 or abs(s1 - s2) < ans:
+                ans = abs(s1 - s2)
+
+print(ans)
+
+
+
