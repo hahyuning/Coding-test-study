@@ -1,5 +1,6 @@
 import heapq
 
+
 def dijkstra(start):
     q = []
     dist = [-1] * (v + 3)
@@ -20,6 +21,7 @@ def dijkstra(start):
                 dist[nxt] = ncost
                 heapq.heappush(q, (ncost, nxt))
     return dist
+
 
 v, e = map(int, input().split())
 graph = [[] for _ in range(v + 3)]
