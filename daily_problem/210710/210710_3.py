@@ -1,4 +1,5 @@
-from collections import deque
+import sys
+input = sys.stdin.readline
 
 def find(x):
     if parent[x] != x:
@@ -13,33 +14,35 @@ def union(a, b):
     else:
         parent[a] = b
 
-n, m, t = map(int, input().split())
-graph = [[] for _ in range(n + 1)]
-for _ in range(m):
-    a, b, c = map(int, input().split())
-    graph[a].append((c, b))
-    graph[b].append((c, a))
-
+n = int(input())
 parent = [i for i in range(n + 1)]
+a = [input().rstrip() for _ in range(n)]
+edges = []
+all_cost = 0
+for i in range(n):
+    for j in range(n):
+        if a[i][j] == "0":
+            continue
 
-res = -1
-cnt = 0
-q = deque()
-q.append((1, 0))
-check = [False] * (n + 1)
-check[1] = True
+        if a[i][j].isupper():
+            cost = ord(a[i][j]) - 38
+        else:
+            cost = ord(a[i][j]) - ord("a") + 1
+        all_cost += cost
+        if i != j:
+            edges.append((cost, i, j))
+edges.sort()
 
-while q:
-    now, now_cost = q.popleft()
-    if sum(check[1:]) == n:
-        if res == -1 or now_cost < res:
-            res = now_cost
+res = 0
+for edge in edges:
+    cost, a, b = edge
+    if find(a) != find(b):
+        union(a, b)
+        res += cost
 
-    edges = graph[now]
-    edges.sort()
-    for cost, nxt in edges:
-        if find(now) != find(nxt):
-            union(now, nxt)
-            q.append((nxt, now_cost + cost + t * cnt))
-            cnt += 1
-print(res)
+for i in range(n - 1):
+    if find(i) != find(i + 1):
+        print(-1)
+        break
+else:
+    print(all_cost - res)
