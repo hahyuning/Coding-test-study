@@ -1,7 +1,7 @@
 # Node 클래스
 # key: 해당 노드의 문자, child: 자식 노드
 # data: 문자열이 끝나는 위치를 알려주는 역할 (해당 노드에서 끝나는 문자열이 없으면 None)
-class Node():
+class Node:
     def __init__(self, key, data=None):
         self.key = key
         self.data = data
@@ -9,7 +9,7 @@ class Node():
 
 
 # Trie 클래스
-class Trie():
+class Trie:
     def __init__(self):
         self.head = Node(None)
 
