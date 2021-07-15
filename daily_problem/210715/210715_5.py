@@ -1,24 +1,31 @@
-from bisect import bisect_left
-
-m, n, l = map(int, input().split())
-sadae = list(map(int, input().split()))
-sadae.sort()
-animal = []
-for _ in range(n):
-    a, b = map(int, input().split())
-    animal.append((a, b))
+n, k = map(int, input().split())
 
 cnt = 0
-for x, y in animal:
-    length = l - y
-    idx = bisect_left(sadae, x)
-    if idx == 0:
-        if abs(sadae[0] - x) <= length:
-            cnt += 1
-    elif idx == m:
-        if abs(sadae[-1] - x) <= length:
-            cnt += 1
-    else:
-        if abs(sadae[idx - 1] - x) <= length or abs(sadae[idx] - x) <= length:
-            cnt += 1
+for h in range(0, n + 1):
+    for m in range(0, 60):
+        for s in range(0, 60):
+            if h == 0:
+                hh = "00"
+            elif 0 < h < 10:
+                hh = "0" + str(h)
+            else:
+                hh = str(h)
+
+            if m == 0:
+                mm = "00"
+            elif 0 < m < 10:
+                mm = "0" + str(m)
+            else:
+                mm = str(m)
+
+            if s == 0:
+                ss = "00"
+            elif 0 < s < 10:
+                ss = "0" + str(s)
+            else:
+                ss = str(s)
+
+            if str(k) in hh + mm + ss:
+                cnt += 1
+
 print(cnt)
