@@ -1,4 +1,5 @@
 import heapq
+
 k, n = map(int, input().split())
 a = list(map(int, input().split()))
 q = []
@@ -11,7 +12,7 @@ for _ in range(n):
     ans = now
     for x in a:
         heapq.heappush(q, x * now)
-        
+
         if now % x == 0:
             break
 print(ans)
