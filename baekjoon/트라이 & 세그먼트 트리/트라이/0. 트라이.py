@@ -7,18 +7,17 @@ class Node:
         self.data = data
         self.child = dict()
 
-
 # Trie 클래스
 class Trie:
     def __init__(self):
-        self.head = Node(None)
+        self.root = Node(None)
 
     # 문자열 삽입
-    def insert(self, string):
-        curr_node = self.head
+    def insert(self, word):
+        curr_node = self.root
 
-        # 삽입할 string의 각각의 문자에 대해 자식 Node를 만든다.
-        for char in string:
+        # 삽입할 word의 각각의 문자에 대해 자식 Node를 만든다.
+        for char in word:
             # 자식 Node들 중 같은 문자가 없으면 새로운 Node 생성
             if char not in curr_node.child:
                 curr_node.child[char] = Node(char)
@@ -26,18 +25,17 @@ class Trie:
             curr_node = curr_node.child[char]
 
         # 문자열이 끝난 지점의 노드의 data 값에 해당 문자열 입력
-        curr_node.data = string
+        curr_node.data = word
 
     # 문자열 조회
-    def search(self, string):
+    def search(self, word):
         # 가장 위에 있는 노드에서부터 탐색 시작
-        curr_node = self.head
+        curr_node = self.root
 
-        for char in string:
-            if char in curr_node.child:
-                curr_node = curr_node.child[char]
-            else:
+        for char in word:
+            if char not in curr_node.child:
                 return False
+            curr_node = curr_node.child[char]
 
         # 탐색이 끝난 후 해당 노드의 data 값이 존재한다면 탐색 성공
         if curr_node.data != None:
