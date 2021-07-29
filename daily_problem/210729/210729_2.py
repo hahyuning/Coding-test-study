@@ -3,6 +3,10 @@ for _ in range(t):
     n = int(input())
     sticker = [list(map(int, input().split())) for _ in range(2)]
 
+    if n == 1:
+        print(max(sticker[0][0], sticker[0][1]))
+        continue
+
     sticker[0][1] += sticker[1][0]
     sticker[1][1] += sticker[0][0]
 
