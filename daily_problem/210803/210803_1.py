@@ -1,23 +1,15 @@
-k, n = map(int, input().split())
-w = [0]
-v = [0]
+s = input()
+n = len(s)
+ans = []
+for i in range(n - 1):
+    for j in range(i, n - 1):
+        if i == j:
+            continue
 
-for _ in range(n):
-    a, b = map(int, input().split())
-    w.append(b)
-    v.append(a)
-
-# d[i][j]: i번째 물건까지 고려했을 때, 배낭에 넣은 무게의 합이 j일 때의 가치의 최대값
-# i번째 물건을 넣지 않은 경우 = d[i - 1][j]
-# i번째 물건을 넣은 경우 = d[i - 1][j - w[i]] + v[i]
-d = [[0] * (k + 1) for _ in range(n + 1)]
-
-for i in range(1, n + 1):
-    for j in range(1, k + 1):
-        # 무게 j를 만들때 i번째 물건을 썼냐 안썻냐 비교
-        d[i][j] = d[i - 1][j]
-        # 대신 물건을 뺏을 때 가방의 무게가 음수가 되는지 확인, 즉 물건의 무게가 가방의 제한을 넘어가는 경우
-        if j - w[i] >= 0:
-            d[i][j] = max(d[i][j], d[i - 1][j - w[i]] + v[i])
-
-print(d[n][k])
+        tmp = [s[:i + 1], s[i + 1:j + 1], s[j + 1:]]
+        t = ""
+        for x in tmp:
+            t += x[::-1]
+        ans.append(t)
+ans.sort()
+print(ans[0])
