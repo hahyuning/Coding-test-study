@@ -1,4 +1,7 @@
-s = input()
+import sys
+input = sys.stdin.readline
+
+s = input().rstrip()
 d = [[0] * 26 for _ in range(len(s) + 1)]
 
 for i in range(1, len(s) + 1):
@@ -11,9 +14,10 @@ for i in range(1, len(s) + 1):
 
 n = int(input())
 for _ in range(n):
-    x, l, r = input().split()
+    x, l, r = input().rstrip().split()
     x = ord(x) - ord("a")
     r = int(r)
     l = int(l)
 
-    print(d[r + 1][x] - d[l][x])
+    ans = d[r + 1][x] - d[l][x]
+    sys.stdout.write(str(ans) + "\n")
