@@ -1,13 +1,10 @@
 import sys
-
 sys.setrecursionlimit(10 ** 5)
-
 
 def find(x):
     if parent[x] != x:
         parent[x] = find(parent[x])
     return parent[x]
-
 
 def union(a, b):
     a = find(a)
@@ -16,7 +13,6 @@ def union(a, b):
     if a == b:
         return
     parent[a] = b
-
 
 n, m = map(int, input().split())
 parent = [i for i in range(n + 1)]
