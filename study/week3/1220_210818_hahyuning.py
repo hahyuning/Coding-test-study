@@ -13,6 +13,7 @@ for t in range(1, 11):
                 if n_check:
                     cnt += 1
                     n_check = False
+
     print("#{}".format(t), end=" ")
     print(cnt)
 
