@@ -28,18 +28,16 @@ def recursion(cnt, idx):
     x = idx // n
     y = idx % n
 
-    print(cnt, idx)
     # 가로선을 넣을 수 있는 경우
     if y + 1 < n and lines[x][y] == 0 and lines[x][y + 1] == 0:
         lines[x][y] = 1
         lines[x][y + 1] = 2
-        recursion(cnt + 1, idx + 2)
+        recursion(cnt + 1, idx + 1)
         lines[x][y] = 0
         lines[x][y + 1] = 0
 
     # 가로선을 안 넣는 경우
-    if idx + 1 < n * h - 1:
-        recursion(cnt, idx + 1)
+    recursion(cnt, idx + 1)
 
 
 n, m, h = map(int, input().split())
