@@ -1,4 +1,4 @@
-# 영역의 개수, 가장 큰 영역의 넓이 리턴
+# [영역의 개수, 가장 큰 영역의 넓이] 리턴
 def solution(m, n, picture):
 
     dx = [-1, 1, 0, 0]
@@ -26,5 +26,3 @@ def solution(m, n, picture):
                 width = max(width, cnt)
 
     return [ans, width]
-
-print(solution(6, 4, [[1, 1, 1, 0], [1, 1, 1, 0], [0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1]]))
