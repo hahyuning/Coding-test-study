@@ -46,8 +46,7 @@ swan2 = deque()
 sx, sy, ex, ey = -1, -1, -1, -1
 for i in range(n):
     for j in range(m):
-        # 백조가 있던 자리도 물로 처리해야 하므로
-        # 백조먼저 확인
+        # 백조가 있던 자리도 물로 처리해야 하므로 백조먼저 확인
         if a[i][j] == "L":
             if sx == -1 and sy == -1:
                 sx, sy = i, j
@@ -56,6 +55,7 @@ for i in range(n):
             else:
                 ex, ey = i, j
             a[i][j] = "."
+
         if a[i][j] == ".":
             water1.append((i, j))
             water_check[i][j] = True
