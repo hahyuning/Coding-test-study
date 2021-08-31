@@ -24,6 +24,7 @@ while q:
         res[nxt] = max(res[nxt], res[now] + nxt_cost)
         if indegree[nxt] == 0:
             q.append(nxt)
+print(res[e])
 
 check = [False] * (n + 1)
 check[e] = True
@@ -37,6 +38,4 @@ while q:
             if not check[nxt]:
                 check[nxt] = True
                 q.append(nxt)
-
-print(res[e])
 print(cnt)
