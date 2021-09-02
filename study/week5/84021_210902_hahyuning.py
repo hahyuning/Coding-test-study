@@ -1,6 +1,6 @@
 from collections import deque
 
-# 1. 블록 나누기
+# 블록 나누기
 def bfs(x, y, a, visited, num):
     n = len(a)
     dx = [-1, 1, 0, 0]
