@@ -4,12 +4,11 @@ class Node:
         self.data = []
         self.child = dict()
 
-# Trie 클래스
+
 class Trie:
     def __init__(self):
         self.root = Node(None)
 
-    # 문자열 삽입
     def insert(self, word):
         curr_node = self.root
 
