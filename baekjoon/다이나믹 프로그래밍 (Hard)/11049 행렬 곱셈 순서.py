@@ -1,6 +1,7 @@
 n = int(input())
 a = [list(map(int, input().split())) for _ in range(n)]
 
+# d[i][j]: i 번째부터 j 번째까지 행렬을 곱하는데 필요한 곱셈 연산의 최솟값
 d = [[0] * n for _ in range(n)]
 
 # 범위 중요
