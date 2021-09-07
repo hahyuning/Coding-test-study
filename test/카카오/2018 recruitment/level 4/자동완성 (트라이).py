@@ -1,5 +1,5 @@
 class Node:
-    def __init__(self, key, data=None):
+    def __init__(self, key):
         self.key = key
         self.data = []
         self.child = dict()
@@ -46,5 +46,3 @@ def solution(words):
         ans += trie.search(x)
 
     return ans
-
-solution(["word","war","warrior","world"])
