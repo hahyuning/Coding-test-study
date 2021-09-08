@@ -13,11 +13,15 @@ def isMatch(candi_ids, banned_ids):
                 return False
     return True
 
-def solution(user_ids, baaned_ids):
+def solution(user_ids, banned_ids):
     ans = []
-    for candi_ids in permutations(user_ids, len(baaned_ids)):
-        if isMatch(candi_ids, baaned_ids):
-            c_set = set(candi_ids)
-            if c_set not in ans:
-                ans.append(c_set)
+
+    # 가능한 사용자 아이디의 쌍을 모두 만들고
+    for candi_ids in permutations(user_ids, len(banned_ids)):
+        # 해당 쌍이 불량 아이디와 매치되는지 확인
+        if isMatch(candi_ids, banned_ids):
+            tmp = set(candi_ids)
+            if tmp not in ans:
+                ans.append(tmp)
+
     return len(ans)
