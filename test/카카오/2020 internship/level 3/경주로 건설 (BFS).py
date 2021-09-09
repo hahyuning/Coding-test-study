@@ -2,6 +2,8 @@ from collections import deque
 
 def solution(board):
     n = len(board)
+
+    # 시작위치, 방향 (북서남동)
     dist = {(0, 0, 2): 0, (0, 0, 3): 0}
     q = deque()
     q.append((0, 0, 2))
@@ -15,10 +17,12 @@ def solution(board):
         for k in range(4):
             nx, ny = x + dx[k], y + dy[k]
             if 0 <= nx < n and 0 <= ny < n and board[nx][ny] == 0:
+                # 방향을 바꾸지 않는 경우
                 if k == dir or (k + 2) % 4 == dir:
                     if (nx, ny, k) not in dist or dist[(nx, ny, k)] > dist[(x, y, dir)] + 1:
                         dist[(nx, ny, k)] = dist[(x, y, dir)] + 1
                         q.append((nx, ny, k))
+                # 방향을 바꾸는 경우
                 else:
                     if (nx, ny, k) not in dist or dist[(nx, ny, k)] > dist[(x, y, dir)] + 6:
                         dist[(nx, ny, k)] = dist[(x, y, dir)] + 6
@@ -31,5 +35,3 @@ def solution(board):
                 ans = dist[(n - 1, n - 1, i)]
 
     return ans * 100
-
-print(solution([[0, 1, 1, 0], [0, 0, 0, 1], [1, 1, 0, 1], [1, 1, 0, 0]]))
