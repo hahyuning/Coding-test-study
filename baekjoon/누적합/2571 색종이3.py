@@ -30,3 +30,38 @@ for i in range(101):
                 w += 1
 
 print(ans)
+
+# ------------------------------------------------------------
+
+a = [[0] * 100 for _ in range(100)]
+s = [[0] * 100 for _ in range(100)]
+
+n = int(input())
+for _ in range(n):
+    x, y = map(int, input().split())
+    for i in range(x, x + 10):
+        for j in range(y, y + 10):
+            a[i][j] = 1
+
+for i in range(1, 100):
+    for j in range(1, 100):
+        if a[i][j] == 1:
+            s[i][j] = s[i][j - 1] + a[i][j]
+
+ans = 0
+for i in range(1, 100):
+    for j in range(1, 100):
+        if a[i][j] == 0:
+            continue
+        height = 0
+        width = s[i][j]
+        for k in range(i, 0, -1):
+            if s[k][j] == 0:
+                break
+
+            height += 1
+            width = min(width, s[k][j])
+
+            ans = max(ans, height * width)
+
+print(ans)
