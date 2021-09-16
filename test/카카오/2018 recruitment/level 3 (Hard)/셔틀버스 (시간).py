@@ -6,7 +6,7 @@
 # 또한, 모든 크루는 잠을 자야 하므로 23:59에 집에 돌아간다. 따라서 어떤 크루도 다음날 셔틀을 타는 일은 없다.
 
 def print_time(t):
-    return str(t // 60).zfill(2) + ":" + str(t % 60).zfill(0)
+    return str(t // 60).zfill(2) + ":" + str(t % 60).zfill(2)
 
 def solution(n, t, m, timetable):
     timetable = [int(time[:2]) * 60 + int(time[3:]) for time in timetable]

@@ -1,5 +1,5 @@
 def print_time(t):
-    return str(t // 60).zfill(2) + ":" + str(t % 60).zfill(0)
+    return str(t // 60).zfill(2) + ":" + str(t % 60).zfill(2)
 
 def solution(n, t, m, timetable):
     timetable = [int(time[:2]) * 60 + int(time[3:]) for time in timetable]
@@ -11,10 +11,14 @@ def solution(n, t, m, timetable):
     for i in range(n):
         cnt = 0
         while True:
+            # 종료조건
+            # 1. 전체 승객을 모두 태운 경우
             if idx >= len(timetable):
                 break
+            # 2. 버스에 태운 승객이 m명인 경우
             if cnt == m:
                 break
+            # 3. 버스 출발 시간보다 늦게 온 경우
             if timetable[idx] > now:
                 break
             cnt += 1
