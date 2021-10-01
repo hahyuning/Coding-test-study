@@ -5,7 +5,7 @@ r, c, k = map(int, input().split())
 r -= 1
 c -= 1
 
-# a[r][c] = k 가 되는 최소 시간
+# a[r][c] = k 가 되는 최소 시간 구하기
 a = [[0] * 100 for _ in range(100)]
 for i in range(3):
     tmp = list(map(int, input().split()))
@@ -21,7 +21,7 @@ m = 3
 for t in range(1, 101):
     # 행이 열보다 크거나 같은 경우 R 연산 수행
     if n >= m:
-        mm = m # 바뀌는 열의 갯수
+        new_m = m # 바뀌는 열의 갯수
 
         # 등장 횟수 기록
         for i in range(n):
@@ -45,10 +45,10 @@ for t in range(1, 101):
             for j in range(limit * 2, 100):
                 a[i][j] = 0
 
-            mm = max(len(b) * 2, mm)
-        m = mm
+            new_m = max(len(b) * 2, new_m)
+        m = new_m
     else:
-        nn = n
+        new_n = n
 
         # 등장 횟수 기록
         for j in range(m):
@@ -71,12 +71,10 @@ for t in range(1, 101):
             for i in range(limit * 2, 100):
                 a[i][j] = 0
 
-            nn = max(len(b) * 2, nn)
-        n = nn
+            new_n = max(len(b) * 2, new_n)
+        n = new_n
 
     if a[r][c] == k:
         print(t)
         sys.exit(0)
 print(-1)
-
-

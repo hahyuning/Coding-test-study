@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-# 2. cctv 방향 결정 (재귀)
+# 2. cctv 방향 결정
 def solution(idx, dir):
     if idx == len(cctv):
         b = deepcopy(a)
