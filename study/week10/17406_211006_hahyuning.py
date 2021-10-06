@@ -1,7 +1,7 @@
 from copy import deepcopy
 
 
-# 1. 순서 정하기
+# 1. 회전 순서 정하기
 def next_permutation(a):
     i = len(a) - 1
     while i > 0 and a[i - 1] >= a[i]:
@@ -23,10 +23,11 @@ def next_permutation(a):
     return True
 
 
-# 2. 순서대로 연산 적용
-def solution(a, info):
+# 2. 회전 연산
+def rotate(a, info):
     row, col, size = info
     groups = []
+    # 그룹 나누기
     for s in range(1, size + 1):
         group = []
         # (r-s, c-s) -> (r-s, c+s)
@@ -42,6 +43,8 @@ def solution(a, info):
         for r in range(row + s, row - s, -1):
             group.append(a[r][col - s])
         groups.append(group)
+
+    # 각 그룹별로 회전
     for s in range(1, size + 1):
         group = groups[s - 1]
         group = group[-1:] + group[:-1]
@@ -77,9 +80,9 @@ ans = 10000
 while True:
     b = deepcopy(a)
     for info in rotation:
-        solution(b, info)
+        rotate(b, info)
 
-    # 3. 배열의 최솟값 구하기
+    # 3. 최솟값 구하기
     for i in range(n):
         tmp = sum(b[i])
         if tmp < ans:
