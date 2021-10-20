@@ -1,5 +1,4 @@
 from collections import deque
-from copy import deepcopy
 
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
