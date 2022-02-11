@@ -3,7 +3,7 @@
 [![Solved.ac프로필](http://mazassumnida.wtf/api/mini/generate_badge?boj=hahyuning)](https://solved.ac/hahyuning)
 <br><br>
 
-## 이용한 온라인 코딩 사이트
+## 온라인 코딩 사이트
 - [Baekjoon](https://www.acmicpc.net/)
 - [Programmers](https://programmers.co.kr/)
 - [SW Expert Academy](https://swexpertacademy.com/main/main.do)
@@ -39,8 +39,7 @@
 <br><br>
 
 ## 공부내용
-- 매일 온라인 코딩 문제 5개씩 풀이 (~ 2021.10.23)
-- 매주 온라인 코딩 문제 풀이 (2021.12.11 ~)
+- 매일 온라인 코딩 문제 풀이
 
 - 자료구조 스터디
   - 기간: 2020.04 ~ 2020.07
