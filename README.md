@@ -3,7 +3,7 @@
 [![Solved.ac프로필](http://mazassumnida.wtf/api/mini/generate_badge?boj=hahyuning)](https://solved.ac/hahyuning)
 <br><br>
 
-## 이용한 온라인 코딩 사이트
+## 온라인 코딩 사이트
 - [Baekjoon](https://www.acmicpc.net/)
 - [Programmers](https://programmers.co.kr/)
 - [SW Expert Academy](https://swexpertacademy.com/main/main.do)
@@ -30,9 +30,16 @@
 
 <br><br>
 
+## 수강한 온라인 강의
+- [코딩 테스트 준비 - 기초](https://code.plus/course/51)
+- [코딩 테스트 준비 - 연습](https://code.plus/course/52)
+- [코딩 테스트 준비 - 문제](https://code.plus/course/53)
+- [파이썬 알고리즘 문제풀이 (코딩테스트 대비)](https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C%ED%92%80%EC%9D%B4-%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8#curriculum)
+
+<br><br>
+
 ## 공부내용
-- 매일 온라인 코딩 문제 5개씩 풀이 (~ 2021.10.23)
-- 매주 온라인 코딩 문제 풀이 (2021.12.11 ~)
+- 매일 온라인 코딩 문제 풀이
 
 - 자료구조 스터디
   - 기간: 2020.04 ~ 2020.07
