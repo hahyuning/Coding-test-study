@@ -20,7 +20,7 @@ def dijkstra(start):
                 dist[nxt] = nxt_cost
                 heapq.heappush(q, (nxt_cost, nxt))
 
-# --------------------------------------------------------------------------
+
 n, m = map(int, input().split())
 start = int(input())
 graph = [[] for _ in range(n + 1)]
